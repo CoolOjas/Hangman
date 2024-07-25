@@ -48,9 +48,9 @@ class Game:
 
     def getinput(self):
         b = input("guess a singular letter ")
-        self.lettersguessed.append(b)
-        if b not in self.word:
+        if b not in self.word and b not in self.lettersguessed:
             self.hangman.limbs += 1
+        self.lettersguessed.append(b)
 
     def singularloop(self):
         self.getinput()
