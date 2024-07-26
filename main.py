@@ -1,7 +1,10 @@
-import spacy
 
-nlp = spacy.load("en_core_web_sm")
 import random
+
+
+with open("Words.txt", "r")as file:
+    ro = file.read()
+splitro = ro.split("\n")
 
 
 class Hangman:
@@ -32,7 +35,7 @@ class Hangman:
 class Game:
     def __init__(self):
         self.hangman = Hangman()
-        wordset = nlp.vocab.strings
+        wordset = splitro
         word = random.choice(list(wordset))
         self.word = word.lower()
         lettersguessed = []
