@@ -1,4 +1,4 @@
-
+import time
 import random
 
 
@@ -58,6 +58,7 @@ class Game:
     def singularloop(self):
         self.getinput()
         self.showword()
+        time.sleep(0.5)
         self.hangman.draw()
 
     def completelyguessedword(self):
@@ -67,6 +68,7 @@ class Game:
         return True
 
     def fullgameloop(self):
+        self.intro()
         self.showword()
         while not self.hangman.dead() and not self.completelyguessedword():
             self.singularloop()
@@ -77,7 +79,37 @@ class Game:
             print(f"you lost {self.word}")
         else:
             print("nice you won")
+        self.calculatescore()
+    def intro(self):
+        print("hello, welcome to my hangman, in hangman you have to guess the word, keep on guessing letters until you lose or win!!!! This is Ojas Hangman!!!!!!!")
+    def calculatescore(self):
+        score = 0
+        if self.completelyguessedword():
+            score += 10
+        correctlyguessedletter = 0
+        for i in range(0, len(self.word), 1):
+            if self.word[i] in self.lettersguessed:
+                correctlyguessedletter += 1
+        skibidi = correctlyguessedletter
+        score += skibidi*100
+        print(f" you got {score} points")
 
+        with open("Score.txt", "r") as file:
+            highscore = float(file.read())
+
+        looksmaxxing = max(highscore,score)
+
+
+        with open("Score.txt", "w") as file:
+            file.write(str(looksmaxxing))
+
+        print(f" your highscore is {looksmaxxing}")
+
+
+rizz = input('how many games do you want to play????????')
+for i in range(0,int(rizz),1):
+    game37490573495 = Game()
+    game37490573495.fullgameloop()
 
 game1 = Game()
-game1.fullgameloop()
+
